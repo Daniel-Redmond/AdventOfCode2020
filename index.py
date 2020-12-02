@@ -1,5 +1,6 @@
 import json
 from expense_report import expense_report
+from password_validator import password_validator
 
 import logging
 logging.basicConfig(level='ERROR')
@@ -18,37 +19,36 @@ def get_input(input_file_name):
 def main():
     """
 
-    DAY 1:
+    DAY 2:
 
-    https://adventofcode.com/2020/day/1
+    https://adventofcode.com/2020/day/2
 
     """
 
-    task_input = get_input("day_1.txt")
-    report = expense_report(logging,task_input)
+    task_input = get_input("day_2.txt")
+   
+    validator = password_validator(logging)
 
     task_num = input('Task Number: ')
     
     if task_num == '1': 
 
-        total_aggregate = 2020
-        numbers_aggregated_count = 2
+        validator.set_validation_method('character_count')
 
     elif task_num == '2':
 
-        total_aggregate = 2020
-        numbers_aggregated_count = 3
+        validator.set_validation_method('character_position')
 
     else:
 
         print('Task does not exist...')
-        total_aggregate = int(input('Total Aggregate: '))
-        numbers_aggregated_count = int(input('Numbers Aggregated Count: '))
+        validator.set_validation_method(input('Validation Method: '))
 
-    task_result = report.repair_report(total_aggregate,numbers_aggregated_count)
+    validator.load_passwords(task_input)
+    task_result = validator.validate()
 
-    print(f'Result: {task_result}')
-    print(f'Iterations: {report.total_iterations}')
+    print(f"Valid Count: { len( task_result['valid'] ) }")
+    print(f"Invalid Count: { len( task_result['invalid'] ) }")
     
 
 if __name__ == "__main__":
