@@ -9,3 +9,7 @@ The code for each individual daily challenge can be found in a branch named afte
 Day 1
 - [x] Task 1
 - [x] Task 2
+
+Day 2
+- [x] Task 1
+- [x] Task 2
